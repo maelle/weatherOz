@@ -57,12 +57,12 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_extreme_weather</span><span class="op">(</span><span class="va">site</span>, type <span class="op">=</span> <span class="st">"all"</span>, api_key <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_extreme_weather</span><span class="op">(</span><span class="va">station_id</span>, type <span class="op">=</span> <span class="st">"all"</span>, api_key <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>site</dt>
+    <dl><dt>station_id</dt>
 <dd><p>A string with the station ID code for the station of interest.</p></dd>
 
 
@@ -80,7 +80,7 @@
     <h2>Value</h2>
     
 
-<p>a <code>data.table</code> of one row with 'stationCode', 'stationName',
+<p>a <code>data.table</code> of one row with 'station_code', 'station_name',
 'latitude', 'longitude', 'dateTime' of the query and the extreme weather
 information according to the type(s) selected.</p>
     </div>
@@ -105,7 +105,7 @@ information according to the type(s) selected.</p>
 <span class="r-in"><span><span class="va">my_events</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"erosion"</span>, <span class="st">"heat"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">get_extreme_weather</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  site <span class="op">=</span> <span class="va">my_station</span>,</span></span>
+<span class="r-in"><span>  station_id <span class="op">=</span> <span class="va">my_station</span>,</span></span>
 <span class="r-in"><span>  type <span class="op">=</span> <span class="va">my_events</span>,</span></span>
 <span class="r-in"><span>  api_key <span class="op">=</span> <span class="va">my_key</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
@@ -119,9 +119,9 @@ information according to the type(s) selected.</p>
 <span class="r-in"><span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">these_stations</span>,</span></span>
 <span class="r-in"><span>                  <span class="va">get_extreme_weather</span>,</span></span>
 <span class="r-in"><span>                  type <span class="op">=</span> <span class="st">"all"</span>,</span></span>
-<span class="r-in"><span>                  api_key <span class="op">=</span> <span class="va">apiKey</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  api_key <span class="op">=</span> <span class="va">my_key</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="va">outputs</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="va">outputs</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

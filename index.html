@@ -92,7 +92,7 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<p><!-- badges: start --> <a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a> <!-- badges: end --></p>
+<p><!-- badges: start --> <a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a> <a href="https://github.com/DPIRD-FSI/weatherOz/actions" class="external-link"><img src="https://github.com/DPIRD-FSI/weatherOz/workflows/tic/badge.svg?branch=main" alt="tic"></a> <!-- badges: end --></p>
 <div class="section level1">
 <div class="page-header"><h1 id="weatheroz-an-api-client-for-australian-weather-and-climate-data-resources">{weatherOz}: An API Client for Australian Weather and Climate Data Resources<a class="anchor" aria-label="anchor" href="#weatheroz-an-api-client-for-australian-weather-and-climate-data-resources"></a>
 </h1></div>
@@ -107,14 +107,35 @@
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_git.html" class="external-link">install_git</a></span><span class="op">(</span><span class="st">"https://git.agric.wa.gov.au/r/weatherOz.git"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_git.html" class="external-link">install_git</a></span><span class="op">(</span><span class="st">"https://github.com/DPIRD-FSI/weatherOz.git"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>This is a basic example which shows you how to solve a common problem:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## basic example code</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Source wind and erosion conditions for daily time interval from DPIRD Weather</span></span>
+<span><span class="co"># API</span></span>
+<span><span class="co"># define start and end date</span></span>
+<span><span class="va">start_date</span> <span class="op">&lt;-</span> <span class="st">"2022-05-01"</span></span>
+<span><span class="va">end_date</span> <span class="op">&lt;-</span> <span class="st">"2022-05-02"</span></span>
+<span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_dpird_summaries.html">get_dpird_summaries</a></span><span class="op">(</span></span>
+<span>            site <span class="op">=</span> <span class="st">"BI"</span>,</span>
+<span>            first <span class="op">=</span> <span class="va">start_date</span>,</span>
+<span>            last <span class="op">=</span> <span class="va">end_date</span>,</span>
+<span>            api_key <span class="op">=</span> <span class="va">mykey</span>,</span>
+<span>            interval <span class="op">=</span> <span class="st">"hourly"</span>,</span>
+<span>            which_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wind"</span>, <span class="st">"erosion"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Source data from latitude and longitude coordinates (gridded data - SILO API)</span></span>
+<span><span class="co"># Southwood, QLD in the 'apsim' format.</span></span>
+<span><span class="va">wd</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_silo.html">get_silo</a></span><span class="op">(</span>latitude <span class="op">=</span> <span class="op">-</span><span class="fl">27.85</span>,</span>
+<span>               longitude <span class="op">=</span> <span class="fl">150.05</span>,</span>
+<span>               first <span class="op">=</span> <span class="st">"20221001"</span>,</span>
+<span>               last <span class="op">=</span> <span class="st">"20221201"</span>,</span>
+<span>               data_format <span class="op">=</span> <span class="st">"apsim"</span>,</span>
+<span>               email <span class="op">=</span> <span class="st">"your@email"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="notes-on-data-and-api-endpoints">Notes on Data and API Endpoints<a class="anchor" aria-label="anchor" href="#notes-on-data-and-api-endpoints"></a>
