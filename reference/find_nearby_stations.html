@@ -60,11 +60,10 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">find_nearby_stations</span><span class="op">(</span></span>
 <span>  latitude <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  longitude <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  site <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  station_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  distance_km <span class="op">=</span> <span class="fl">100</span>,</span>
 <span>  api_key <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  wa_only <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  dpird_only <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  which_api <span class="op">=</span> <span class="st">"silo"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -80,9 +79,9 @@
 (DD) (WGS84).</p></dd>
 
 
-<dt>site</dt>
-<dd><p>A <code>string</code> with the station ID code for the station of interest.
-Optional and defaults to <code>NULL</code>.</p></dd>
+<dt>station_id</dt>
+<dd><p>A <code>string</code> with the station ID code for the station of
+interest. Optional and defaults to <code>NULL</code>.</p></dd>
 
 
 <dt>distance_km</dt>
@@ -92,31 +91,30 @@ the station or location of interest.  Defaults to 100 km.</p></dd>
 
 <dt>api_key</dt>
 <dd><p>A <code>string</code> value that is the user's <acronym>API</acronym> key from
-<acronym>DPIRD</acronym> (see <a href="https://www.agric.wa.gov.au/web-apis" class="external-link">https://www.agric.wa.gov.au/web-apis</a>).</p></dd>
+<acronym>DPIRD</acronym> (see <a href="https://www.agric.wa.gov.au/web-apis" class="external-link">https://www.agric.wa.gov.au/web-apis</a>).  Only used
+when <code>which_api</code> is "DPIRD" or "all".</p></dd>
 
 
-<dt>wa_only</dt>
-<dd><p><code>Boolean</code>, return stations in Western Australia only. Defaults
-to <code>TRUE</code>.</p></dd>
-
-
-<dt>dpird_only</dt>
-<dd><p><code>Boolean</code>, return only <acronym>DPIRD</acronym> owned stations.
-Defaults to <code>FALSE</code>.</p></dd>
+<dt>which_api</dt>
+<dd><p>A <code>string</code> value that indicates which API to use.  Defaults
+to "silo". Valid values are "all", for both <acronym>SILO</acronym> (<acronym>BOM</acronym>)
+and <acronym>DPIRD</acronym> weather station networks; "silo" for only stations in
+the <acronym>SILO</acronym> network; or "dpird" for stations in the <acronym>DPIRD</acronym>
+network.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>a <code>data.table</code> with 'stationCode', 'stationName', 'latitude',
-'longitude', 'state', 'owner' and 'distance'. Data are sorted by increasing
-distance from station or location of interest.</p>
+<p>a <code>data.table</code> with 'station_code', 'station_name', 'latitude',
+'longitude', 'elevation', 'state', 'owner', and 'distance'.  Data are sorted
+by increasing distance from station or location of interest.</p>
     </div>
     <div id="note">
     <h2>Note</h2>
-    <p>You can request your own API key from DPIRD for free by filling out the
-form found at <a href="https://www.agric.wa.gov.au/web-apis" class="external-link">https://www.agric.wa.gov.au/web-apis</a>.</p>
+    <p>You can request your own <acronym>API</acronym> key from <acronym>DPIRD</acronym> for
+free by filling out the form found at <a href="https://www.agric.wa.gov.au/web-apis" class="external-link">https://www.agric.wa.gov.au/web-apis</a>.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -126,27 +124,22 @@ form found at <a href="https://www.agric.wa.gov.au/web-apis" class="external-lin
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="co"># You must have an DPIRD API key to proceed</span></span></span>
-<span class="r-in"><span><span class="va">my_key</span> <span class="op">&lt;-</span> <span class="fu">rstudioapi</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/rstudioapi/reference/askForSecret.html" class="external-link">askForSecret</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Query WA only stations and return both DPIRD's and BOM's stations for</span></span></span>
 <span class="r-in"><span><span class="co"># the Northam WA station, returning stations with 50 km of this station</span></span></span>
 <span class="r-in"><span><span class="va">wa_stn</span> <span class="op">&lt;-</span> <span class="fu">find_nearby_stations</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  site <span class="op">=</span> <span class="st">"NO"</span>,</span></span>
+<span class="r-in"><span>  station_id <span class="op">=</span> <span class="st">"NO"</span>,</span></span>
 <span class="r-in"><span>  distance_km <span class="op">=</span> <span class="fl">50</span>,</span></span>
 <span class="r-in"><span>  api_key <span class="op">=</span> <span class="st">"YOUR API KEY"</span>,</span></span>
-<span class="r-in"><span>  dpird_only <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>  wa_only <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>  which_api <span class="op">=</span> <span class="st">"DPIRD"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Query Wagga Wagga BOM station.</span></span></span>
 <span class="r-in"><span><span class="va">wagga_stn</span> <span class="op">&lt;-</span> <span class="fu">find_nearby_stations</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  latitude <span class="op">=</span> <span class="op">-</span><span class="fl">35.1583</span>,</span></span>
 <span class="r-in"><span>  longitude <span class="op">=</span> <span class="fl">147.4575</span>,</span></span>
-<span class="r-in"><span>  distance_km <span class="op">=</span> <span class="fl">50</span>,</span></span>
-<span class="r-in"><span>  api_key <span class="op">=</span> <span class="st">"YOUR API KEY"</span>,</span></span>
-<span class="r-in"><span>  dpird_only <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>  wa_only <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span>  distance_km <span class="op">=</span> <span class="fl">200</span>,</span></span>
+<span class="r-in"><span>  which_api <span class="op">=</span> <span class="st">"SILO"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>

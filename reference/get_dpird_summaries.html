@@ -60,10 +60,10 @@ DPIRD weather station network."><!-- mathjax --><script src="https://cdnjs.cloud
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_dpird_summaries</span><span class="op">(</span></span>
-<span>  station_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">station_id</span>,</span>
+<span>  <span class="va">first</span>,</span>
 <span>  last <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  api_key <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">api_key</span>,</span>
 <span>  interval <span class="op">=</span> <span class="st">"daily"</span>,</span>
 <span>  which_vars <span class="op">=</span> <span class="st">"all"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -72,46 +72,53 @@ DPIRD weather station network."><!-- mathjax --><script src="https://cdnjs.cloud
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>station_id</dt>
-<dd><p>A string of the station ID code for the station of
-interest. Defaults to <code>NULL</code>.</p></dd>
+<dd><p>A <code>character</code> string or <code>vector</code> of the <acronym>DPIRD</acronym>
+station <acronym>ID</acronym> code(s) for the station(s) of interest.</p></dd>
 
 
 <dt>first</dt>
-<dd><p>A string representing the start date of the query in the
-format 'yyyymmdd'. Defaults to <code>NULL</code>.</p></dd>
+<dd><p>A <code>character</code> string representing the start date of the query in
+the format 'yyyymmdd'.</p></dd>
 
 
 <dt>last</dt>
-<dd><p>A string representing the start date of the query in the
-format 'yyyymmdd'. Defaults to the current system date.</p></dd>
+<dd><p>A <code>character</code> string representing the start date of the query in
+the format 'yyyymmdd'.  Defaults to the current system date.</p></dd>
 
 
 <dt>api_key</dt>
-<dd><p>An <acronym>API</acronym> key from <acronym>DPIRD</acronym>.
-(<a href="https://www.agric.wa.gov.au/web-apis" class="external-link">https://www.agric.wa.gov.au/web-apis</a>). Defaults to <code>NULL</code>.</p></dd>
+<dd><p>A <code>character</code> string containing your <acronym>API</acronym> key from
+<acronym>DPIRD</acronym>, <a href="https://www.agric.wa.gov.au/web-apis" class="external-link">https://www.agric.wa.gov.au/web-apis</a>, for the
+<acronym>DPIRD</acronym> weather <acronym>API</acronym>.</p></dd>
 
 
 <dt>interval</dt>
-<dd><p>Time interval to summarise over.
-Default is 'daily'; others are '15min', '30min', 'hourly', 'monthly',
-and 'yearly'. For intervals shorter than 1 day, time period covered
-will be midnight to midnight, with the last time interval being before
-midnight - hour/minute values are for the end of the time period.
-Data for shorter intervals ('15min', '30min') are available from
-January of the previous year.</p></dd>
+<dd><p>A <code>character</code> string that indicates the time interval to
+summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',
+'monthly' or 'yearly'.  For intervals shorter than 1 day, the time period
+covered will be midnight to midnight, with the last time interval being
+before midnight - hour/minute values are for the end of the time period.
+Data for shorter intervals ('15min', '30min') are available from January of
+the previous year.</p></dd>
 
 
 <dt>which_vars</dt>
-<dd><p>Match weather summary selected. Defaults to "all"; others
-are "rain", "wind", "temp" and "erosion."</p></dd>
+<dd><p>A <code>character</code> string selecting the desired weather summary.
+Defaults to 'all'.  Can be one of 'all', 'rain', 'wind', 'temp', 'soil' or
+'erosion'.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>a <code>data.table</code> with <code>station_id</code> and date interval queried together
+<p>a <code>data.table</code> with 'station_id' and date interval queried together
 with the requested weather variables.</p>
+    </div>
+    <div id="note">
+    <h2>Note</h2>
+    <p>Please note this function converts date-time columns from Coordinated
+Universal Time 'UTC' to Australian Western Standard Time 'AWST'.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -123,8 +130,6 @@ with the requested weather variables.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span><span class="co"># You must have an DPIRD API key to proceed</span></span></span>
-<span class="r-in"><span><span class="va">mykey</span> <span class="op">&lt;-</span> <span class="st">'dpird_api_key'</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Set date interval for yearly request</span></span></span>
 <span class="r-in"><span><span class="co"># Get rainfall summary</span></span></span>
 <span class="r-in"><span><span class="va">start_date</span> <span class="op">&lt;-</span> <span class="st">"20171028"</span></span></span>
@@ -133,7 +138,7 @@ with the requested weather variables.</p>
 <span class="r-in"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">get_dpird_summaries</span><span class="op">(</span></span></span>
 <span class="r-in"><span>            station_id <span class="op">=</span> <span class="st">"CL001"</span>,</span></span>
 <span class="r-in"><span>            first <span class="op">=</span> <span class="va">start_date</span>,</span></span>
-<span class="r-in"><span>            api_key <span class="op">=</span> <span class="va">mykey</span>,</span></span>
+<span class="r-in"><span>            api_key <span class="op">=</span> <span class="st">"YOUR API KEY"</span>,</span></span>
 <span class="r-in"><span>            interval <span class="op">=</span> <span class="st">"yearly"</span>,</span></span>
 <span class="r-in"><span>            which_vars <span class="op">=</span> <span class="st">"rain"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -146,7 +151,7 @@ with the requested weather variables.</p>
 <span class="r-in"><span>            station_id <span class="op">=</span> <span class="st">"BI"</span>,</span></span>
 <span class="r-in"><span>            first <span class="op">=</span> <span class="va">start_date</span>,</span></span>
 <span class="r-in"><span>            last <span class="op">=</span> <span class="va">end_date</span>,</span></span>
-<span class="r-in"><span>            api_key <span class="op">=</span> <span class="va">mykey</span>,</span></span>
+<span class="r-in"><span>            api_key <span class="op">=</span> <span class="st">"YOUR API KEY"</span>,</span></span>
 <span class="r-in"><span>            interval <span class="op">=</span> <span class="st">"daily"</span>,</span></span>
 <span class="r-in"><span>            which_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wind"</span>, <span class="st">"erosion"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
