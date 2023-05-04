@@ -62,23 +62,12 @@ SILO and DPIRD data sets."><!-- mathjax --><script src="https://cdnjs.cloudflare
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_station_metadata</span><span class="op">(</span></span>
-<span>  check_location <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  api_key <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  which_api <span class="op">=</span> <span class="st">"silo"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_station_metadata</span><span class="op">(</span>api_key <span class="op">=</span> <span class="cn">NULL</span>, which_api <span class="op">=</span> <span class="st">"silo"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>check_location</dt>
-<dd><p><code>Boolean</code>. An optional check to use
-<a href="https://CRAN.R-project.org/package=ASGS.foyer" class="external-link"><span class="pkg">ASGS.foyer</span></a> to double check the station's physical locations and
-correct any errors in the state where the station is located.
-<a href="https://CRAN.R-project.org/package=ASGS.foyer" class="external-link"><span class="pkg">ASGS.foyer</span></a> must be installed to use this.</p></dd>
-
-
-<dt>api_key</dt>
+    <dl><dt>api_key</dt>
 <dd><p>A <code>character</code> string containing your <acronym>API</acronym> key from
 <acronym>DPIRD</acronym>, <a href="https://www.agric.wa.gov.au/web-apis" class="external-link">https://www.agric.wa.gov.au/web-apis</a>, for the
 <acronym>DPIRD</acronym> weather <acronym>API</acronym>.</p></dd>
@@ -105,13 +94,14 @@ during the current year prior to the request being made.</p></dd>
 
 <p>a <code>data.table</code> of <acronym>BOM</acronym> weather stations' metadata for
 stations available from <acronym>SILO</acronym> with the following columns.</p><table class="table table"><tr><td><strong>station_code</strong>:</td><td>Unique station ID. <code>factor</code></td></tr><tr><td><strong>station_name</strong>:</td><td>Unique station name. <code>character</code></td></tr><tr><td><strong>start</strong>:</td><td>Date observations start. <code>date</code></td></tr><tr><td><strong>end</strong>:</td><td>Date observations end. <code>date</code></td></tr><tr><td><strong>lat</strong>:</td><td>Latitude in decimal degrees. <code>numeric</code></td></tr><tr><td><strong>lon</strong>:</td><td>Longitude in decimal degrees. <code>numeric</code></td></tr><tr><td><strong>state</strong>:</td><td>State in which the station is located. <code>character</code></td></tr><tr><td><strong>elev.m</strong>:</td><td>Station elevation in metres. <code>numeric</code></td></tr><tr><td><strong>source</strong>:</td><td>Organisation responsible for the data or station
-maintenance. <code>character</code></td></tr><tr><td><strong>status</strong>:</td><td>Station status, one of "open" or "closed". <code>character</code></td></tr><tr><td><strong>wmo</strong>:</td><td>: World Meteorlogical Organisation, acronymWMO, number if
+maintenance. <code>character</code></td></tr><tr><td><strong>status</strong>:</td><td>Station status, one of "open" or "closed". <code>character</code></td></tr><tr><td><strong>wmo</strong>:</td><td>World Meteorological Organisation, (acronymWMO), number if
 applicable. <code>numeric</code></td></tr></table></div>
     <div id="details">
     <h2>Details</h2>
     <p>If <a href="https://CRAN.R-project.org/package=ASGS.foyer" class="external-link"><span class="pkg">ASGS.foyer</span></a> is installed locally, this function will
 automatically check and correct any invalid state values for stations located
 in Australia in the <acronym>SILO</acronym> data.</p>
+<p><a href="https://CRAN.R-project.org/package=ASGS.foyer" class="external-link"><span class="pkg">ASGS.foyer</span></a> must be installed to use this.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -127,7 +117,8 @@ Meteorology (<acronym>BOM</acronym>) webpage, Bureau of Meteorology Site Numbers
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="co"># fetch SILO metadata</span></span></span>
 <span class="r-in"><span><span class="fu">get_station_metadata</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
