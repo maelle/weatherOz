@@ -61,7 +61,14 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/DPIRD-FSI/weatherOz/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -79,7 +86,7 @@
 Pembleton, Adam H. Sparks and Mark Padgham</h4>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/DPIRD-FSI/weatherOz/blob/HEAD/vignettes/use_case.Rmd" class="external-link"><code>vignettes/use_case.Rmd</code></a></small>
       <div class="hidden name"><code>use_case.Rmd</code></div>
 
     </div>
@@ -111,7 +118,7 @@ functionality from <a href="https://CRAN.R-project.org/package=mailR" class="ext
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"weatherOz"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"mailR"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>  <span class="co"># for filter()</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">weatherOz</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/DPIRD-FSI/weatherOz/" class="external-link">weatherOz</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rpremrajGit/mailR" class="external-link">mailR</a></span><span class="op">)</span></span></code></pre></div>
 <p>For this to work we require a list of alert subscribers. Here we
 create a dummy set of subscribers, locations, and email addresses.</p>
@@ -131,10 +138,12 @@ create a dummy set of subscribers, locations, and email addresses.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">subscribers_list</span><span class="op">)</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Entry"</span>, <span class="st">"Name"</span>, <span class="st">"Surname"</span>, <span class="st">"Location"</span>, <span class="st">"email"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">subscribers_list</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##   Entry  Name Surname  Location                 email</span></span>
-<span><span class="co">## 1     1   Joe   Blogs     Dalby   XXXX.XXXX@gmail.com</span></span>
-<span><span class="co">## 2     2  John     Doe Toowoomba XXXX.XXXX@hotmail.com</span></span>
-<span><span class="co">## 3     3 Jayne     Doe   Warwick     123.123@gmail.com</span></span></code></pre>
+<pre><code><span><span class="co">## data.frame [3, 5]</span></span>
+<span><span class="co">## Entry    chr 1 2 3</span></span>
+<span><span class="co">## Name     chr Joe John Jayne</span></span>
+<span><span class="co">## Surname  chr Blogs Doe Doe</span></span>
+<span><span class="co">## Location chr Dalby Toowoomba Warwick</span></span>
+<span><span class="co">## email    chr XXXX.XXXX@gmail.com XXXX.XXXX@hotmail.com 123.~</span></span></code></pre>
 <p>We also need to specify our email address and password. For this
 project we are using a gmail account to send the email alerts.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
