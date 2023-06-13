@@ -77,21 +77,21 @@ seven-day town forecasts for a specified state or territory.  Ported from
     <h2>Arguments</h2>
     <dl><dt>state</dt>
 <dd><p>Australian state or territory as full name or postal code.
-Fuzzy string matching via <code><a href="https://rdrr.io/r/base/agrep.html" class="external-link">base::agrep()</a></code> is done.  Defaults to
-“AUS” returning all state bulletins, see Details for more.</p></dd>
+Fuzzy string matching via <code><a href="https://rdrr.io/r/base/agrep.html" class="external-link">base::agrep()</a></code> is done.  Defaults to 'AUS'
+returning all state bulletins, see Details for more.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>A <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code> of an Australia <acronym>BOM</acronym> précis
-seven day forecasts for <acronym>BOM</acronym> selected towns.</p>
+<p>A <a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a> of an Australia <acronym>BOM</acronym> précis seven day
+forecasts for <acronym>BOM</acronym> selected towns.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p>Allowed state and territory postal codes, only one state per request
-or all using <code>AUS</code>.</p><dl><dt>ACT</dt>
+or all using 'AUS'.</p><dl><dt>ACT</dt>
 <dd><p>Australian Capital Territory (will return NSW)</p></dd>
 
 <dt>NSW</dt>

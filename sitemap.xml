@@ -31,6 +31,15 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/dpird_extreme_weather_values.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dpird_minute_values.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dpird_summary_values.html</loc>
+  </url>
+  <url>
     <loc>/reference/find_forecast_towns.html</loc>
   </url>
   <url>
@@ -49,6 +58,12 @@
     <loc>/reference/get_coastal_forecast.html</loc>
   </url>
   <url>
+    <loc>/reference/get_dpird_availability.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_dpird_minute.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_dpird_summaries.html</loc>
   </url>
   <url>
@@ -65,9 +80,6 @@
   </url>
   <url>
     <loc>/reference/get_silo.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_station_list.html</loc>
   </url>
   <url>
     <loc>/reference/get_station_metadata.html</loc>
